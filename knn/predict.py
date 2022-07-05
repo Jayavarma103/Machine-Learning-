@@ -5,20 +5,12 @@ from train import get_best_k_using_validation_set, calculate_accuracy, classify_
 
 from validate import validate
 
-"""
-Predicts the target values for data in the file at 'test_X_file_path'.
-Writes the predicted values to the file named "predicted_test_Y_knn.csv". It should be created in the same directory where this code file is present.
-This code is provided to help you get started and is NOT a complete implementation. Modify it based on the requirements of the project.
-"""
-
 def import_data(test_X_file_path):
     test_X = np.genfromtxt(test_X_file_path, delimiter=',', dtype=np.float64, skip_header=1)
     return test_X
 
 
 def predict_target_values(test_X):
-    # Write your code to Predict Target Variables
-    # HINT: You can use other functions which you've already implemented in coding assignments.
     train_X=np.genfromtxt("train_X_knn.csv",delimiter=",",dtype=np.float64,skip_header=1)
     train_Y=np.genfromtxt("train_Y_knn.csv",delimiter=",",dtype=np.float64)
     k=get_best_k_using_validation_set(train_X,train_Y,30,2)
@@ -43,5 +35,4 @@ def predict(test_X_file_path):
 if __name__ == "__main__":
     test_X_file_path = sys.argv[1]
     predict(test_X_file_path)
-    # Uncomment to test on the training data
     validate(test_X_file_path, actual_test_Y_file_path="train_Y_knn.csv") 
