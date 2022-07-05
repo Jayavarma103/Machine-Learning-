@@ -6,22 +6,12 @@ from Train_model import predict_label,mean_normalize,proxy_kernel,gaussian_kerne
 
 from validate import validate
 
-
-"""
-Predicts the target values for data in the file at 'test_X_file_path', using the model learned during training.
-Writes the predicted values to the file named "predicted_test_Y_svm.csv". It should be created in the same directory where this code file is present.
-This code is provided to help you get started and is NOT a complete implementation. Modify it based on the requirements of the project.
-"""
-
 def import_data_and_model(test_X_file_path, model_file_path):
     test_X = np.genfromtxt(test_X_file_path, delimiter=',', dtype=np.float64, skip_header=1)
     model = pickle.load(open(model_file_path, 'rb'))
     return test_X, model
 
-
 def predict_target_values(test_X, model):
-    # Write your code to Predict Target Variables
-    # HINT: You can use other functions which you've already implemented in coding assignments.
     test_X = mean_normalize(test_X)
     y_pred = model.predict(test_X)
     return np.array(y_pred)
@@ -33,15 +23,12 @@ def write_to_csv_file(pred_Y, predicted_Y_file_name):
         wr.writerows(pred_Y)
         csv_file.close()
 
-
 def predict(test_X_file_path):
     test_X, model = import_data_and_model(test_X_file_path, 'MODEL_FILE.sav')
     pred_Y = predict_target_values(test_X, model)
     write_to_csv_file(pred_Y, "predicted_test_Y_svm.csv")    
 
-
 if __name__ == "__main__":
     test_X_file_path = sys.argv[1]
     predict(test_X_file_path)
-    # Uncomment to test on the training data
     validate(test_X_file_path, actual_test_Y_file_path="train_Y_svm.csv") 
