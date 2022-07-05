@@ -6,12 +6,6 @@ import pickle
 from Train_model import Node,construct_tree
 from validate import validate
 
-"""
-Predicts the target values for data in the file at 'test_X_file_path', using the model learned during training.
-Writes the predicted values to the file named "predicted_test_Y_de.csv". It should be created in the same directory where this code file is present.
-This code is provided to help you get started and is NOT a complete implementation. Modify it based on the requirements of the project.
-"""
-
 def import_data_and_model(test_X_file_path, model_file_path):
     test_X = np.genfromtxt(test_X_file_path, delimiter=',', dtype=np.float64, skip_header=1)
     model = pickle.load(open(model_file_path, 'rb'))
@@ -19,8 +13,6 @@ def import_data_and_model(test_X_file_path, model_file_path):
 
 
 def predict_target_values(test_X, model):
-    # Write your code to Predict Target Variables
-    # HINT: You can use other functions which you've already implemented in coding assignments.
     ypred=[]
     for i in range(len(test_X)):
         node = model
@@ -52,5 +44,4 @@ def predict(test_X_file_path):
 if __name__ == "__main__":
     test_X_file_path = sys.argv[1]
     predict(test_X_file_path)
-    # Uncomment to test on the training data
     validate(test_X_file_path, actual_test_Y_file_path="train_Y_de.csv") 
